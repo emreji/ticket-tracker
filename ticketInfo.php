@@ -42,6 +42,10 @@ function getName($userId) : string {
     $user = $users->xpath('/users/user[@id='.$userId.']')[0];
     return $user->name->firstname . ' ' . $user->name->lastname;
 }
+
+function isCurrentStatusEquals($ticket, $status) : string {
+    return (strtolower($ticket->status) == strtolower($status)) ? 'selected' : '';
+}
 ?>
 
 <!doctype html>
@@ -72,8 +76,17 @@ function getName($userId) : string {
             <dd class="col-sm-9"><?php echo $ticket->issuedate ?></dd>
 
             <dt class="col-sm-3">Status</dt>
-            <dd class="col-sm-9"><?php echo $ticket->status ?></dd>
-
+            <?php if(isStaff($_SESSION['id'])) { ?>
+                <dd class="col-sm-9">
+                    <select class="form-control col-sm-3" name="issueStatus">
+                        <option value="New" <?php echo isCurrentStatusEquals($ticket, "New") ?>>New</option>
+                        <option value="On-going" <?php echo isCurrentStatusEquals($ticket, "On-going") ?> >On-going</option>
+                        <option value="Resolved" <?php echo isCurrentStatusEquals($ticket, "Resolved") ?>>Resolved</option>
+                    </select>
+                </dd>
+            <?php } else { ?>
+                <dd class="col-sm-9"><?php echo $ticket->status ?></dd>
+            <?php } ?>
             <dt class="col-sm-3 text-truncate">Category</dt>
             <dd class="col-sm-9"><?php echo $ticket->attributes() ?></dd>
         </dl>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<supportsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="supportsystem.xsd">
+<supportsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/supportsystem.xsd">
     <supportticket category="Software">
         <ticketnumber>A100</ticketnumber>
         <issuedate>2018-01-28</issuedate>
