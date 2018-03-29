@@ -1,51 +1,46 @@
 <?php
+require_once 'datasource.php';
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+if (!DataSource::isAvailable()) {
+    echo 'Data Source not available';
+    return;
+}
+
 session_start();
-if(file_exists('xml/supportsystem.xml')) {
+if(isset($_GET['id'])) {
+    $ticketId = $_GET['id'];
 
-    //supportsystem/supportticket/ticketnumber/text()
-    if(isset($_GET['id'])) {
-        $ticketId = $_GET['id'];
-
-        $tickets = simplexml_load_file('xml/supportsystem.xml');
-        $ticket = $tickets->xpath("/supportsystem/supportticket/ticketnumber[text()='$ticketId']/parent::*")[0];
-        $messages = $ticket->supportmessage;
+    $tickets = simplexml_load_file('xml/supportsystem.xml');
+    $ticket = $tickets->xpath("/supportsystem/supportticket/ticketnumber[text()='$ticketId']/parent::*")[0];
+    $messages = $ticket->supportmessage;
 
 
-        if (isset($_POST['addMessage'])) {
+    if (isset($_POST['addMessage'])) {
 
-            $supportmessage = $ticket->addChild('supportmessage');
-            $supportmessage->addAttribute('userid', $_SESSION['id']);
-            $message = $supportmessage->addChild('message', $_POST['message']);
-            $message = $supportmessage->addChild('time', (new DateTime())->format('Y-m-d H:i:s'));
+        $supportmessage = $ticket->addChild('supportmessage');
+        $supportmessage->addAttribute('userid', $_SESSION['id']);
+        $message = $supportmessage->addChild('message', $_POST['message']);
+        $message = $supportmessage->addChild('time', (new DateTime())->format('Y-m-d H:i:s'));
 
-            $tickets->saveXML('xml/supportsystem.xml');
-        }
-    }
-} else {
-    echo "No file found!";
-}
-
-function getUserRole($userId){
-    if(file_exists('xml/users.xml')) {
-        $users = simplexml_load_file('xml/users.xml');
-        $user = $users->xpath('/users/user[@id='.$userId.']')[0];
-        return $user->attributes()->type;
-    } else {
-        echo "No file found!";
+        $tickets->saveXML('xml/supportsystem.xml');
     }
 }
-function getUsername($userId){
-    if(file_exists('xml/users.xml')) {
-        $users = simplexml_load_file('xml/users.xml');
-        $user = $users->xpath('/users/user[@id='.$userId.']')[0];
-        return $user->username;
-    } else {
-        echo "No file found!";
-    }
+
+function isStaff($userId) : bool {
+    $users = simplexml_load_file('xml/users.xml');
+    $user = $users->xpath('/users/user[@id='.$userId.']')[0];
+    $userType = $user->attributes()->type;
+    return ($userType == 'supportstaff');
+}
+
+function getName($userId) : string {
+    $users = simplexml_load_file('xml/users.xml');
+    $user = $users->xpath('/users/user[@id='.$userId.']')[0];
+    return $user->name->firstname . ' ' . $user->name->lastname;
 }
 ?>
 
@@ -85,14 +80,14 @@ function getUsername($userId){
         <h4>Messages</h4>
         <dl class="row">
             <?php foreach ($messages as $msg): ?>
-                <?php if (getUserRole($msg->attributes()) == 'client') {?>
-                    <dt class="col-sm-2"><?php echo getUsername($msg->attributes())?> : </dt>
+                <?php $userId = $msg->attributes(); ?>
+                <?php if (isStaff($userId)) {?>
+                    <dt class="col-sm-2"><?php echo getName($userId)?> (Staff) : </dt>
                     <dd class="col-sm-9"><?php echo $msg->message?></dd>
-                <?php }?>
-                <?php if (getUserRole($msg->attributes()) == 'supportstaff') {?>
-                    <dt class="col-sm-2"><?php echo getUsername($msg->attributes())?>(Staff) : </dt>
+                <?php } else { ?>
+                    <dt class="col-sm-2"><?php echo getName($userId)?> : </dt>
                     <dd class="col-sm-9"><?php echo $msg->message?></dd>
-                <?php }?>
+                <?php } ?>
             <?php endforeach; ?>
         </dl>
         <form action="" method="post">

@@ -1,32 +1,35 @@
 <?php
+require_once 'datasource.php';
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-session_start();
-if(file_exists('xml/supportsystem.xml')) {
-    $tickets = simplexml_load_file('xml/supportsystem.xml');
-
-    if(isset($_POST['add'])) {
-        $ticket = $tickets->addChild('supportticket');
-        $ticket->addChild('ticketnumber', $_POST['ticketNumber']);
-        $ticket->addChild('issuedate', $_POST['issueDate']);
-        $ticket->addChild('status', $_POST['issueStatus']);
-        $ticket->addAttribute('category', $_POST['issueCategory']);
-        $ticket->addChild('clientid', $_SESSION['id']);
-        $supportmessage = $ticket->addChild('supportmessage');
-        $supportmessage->addAttribute('userid', $_SESSION['id']);
-        $message = $supportmessage->addChild('message', $_POST['message']);
-        $message = $supportmessage->addChild('time', (new DateTime())->format('Y-m-d H:i:s'));
-
-        $tickets->saveXML('supportsystem.xml');
-
-        header('Location: clientHome.php');
-    }
-
-} else {
-    echo "No file found!";
+if (!DataSource::isAvailable()) {
+    echo 'Data Source not available';
+    exit();
 }
+
+session_start();
+$tickets = simplexml_load_file('xml/supportsystem.xml');
+
+if(isset($_POST['add'])) {
+    $ticket = $tickets->addChild('supportticket');
+    $ticket->addChild('ticketnumber', $_POST['ticketNumber']);
+    $ticket->addChild('issuedate', $_POST['issueDate']);
+    $ticket->addChild('status', $_POST['issueStatus']);
+    $ticket->addAttribute('category', $_POST['issueCategory']);
+    $ticket->addChild('clientid', $_SESSION['id']);
+    $supportmessage = $ticket->addChild('supportmessage');
+    $supportmessage->addAttribute('userid', $_SESSION['id']);
+    $message = $supportmessage->addChild('message', $_POST['message']);
+    $message = $supportmessage->addChild('time', (new DateTime())->format('Y-m-d H:i:s'));
+
+    $tickets->saveXML('supportsystem.xml');
+
+    header('Location: clientHome.php');
+}
+
 ?>
 
 <!doctype html>

@@ -1,28 +1,21 @@
 <?php
+require_once 'datasource.php';
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+if (!DataSource::isAvailable()) {
+    echo 'Data Source not available';
+    exit();
+}
+
 session_start();
+
 $userId = $_SESSION['id'];
-
-if(file_exists('xml/users.xml')) {
-    $users = simplexml_load_file('xml/users.xml');
-
-    $user = $users->xpath('/users/user[@id='.$userId.']')[0];
-
-} else {
-    echo "No file found!";
-}
-
-if(file_exists('xml/supportsystem.xml')) {
-
-    $tickets = simplexml_load_file('xml/supportsystem.xml');
-
-} else {
-    echo "No file found!";
-}
-
+$users = simplexml_load_file('xml/users.xml');
+$user = $users->xpath('/users/user[@id='.$userId.']')[0];
+$tickets = simplexml_load_file('xml/supportsystem.xml');
 ?>
 
 <!doctype html>
