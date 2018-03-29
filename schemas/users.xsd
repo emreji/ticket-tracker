@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="users">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="user" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="name">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="firstname" type="xs:string"></xs:element>
+                                        <xs:element name="lastname" type="xs:string"></xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="username" type="xs:string"></xs:element>
+                            <xs:element name="password" type="xs:string"></xs:element>
+                            <xs:element name="position" type="xs:string"></xs:element>
+                            <xs:element name="emailid" type="xs:string"></xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:integer" use="required" />
+                        <xs:attribute name="type" type="usertype" use="required" />
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="usertype">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="client" />
+            <xs:enumeration value="supportstaff" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

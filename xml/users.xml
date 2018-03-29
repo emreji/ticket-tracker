@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="users.xsd">
+    <user id="234" type="client">
+        <name>
+            <firstname>Rob</firstname>
+            <lastname>Harold</lastname>
+        </name>
+        <username>rob_harold</username>
+        <password>password234</password>
+        <position>Assistant Manager</position>
+        <emailid>rob.harold@gmail.com</emailid>
+    </user>
+    <user id="289" type="supportstaff">
+        <name>
+            <firstname>John</firstname>
+            <lastname>Doe</lastname>
+        </name>
+        <username>john_doe</username>
+        <password>password289</password>
+        <position>customer support</position>
+        <emailid>john.doe@gmail.com</emailid>
+    </user>
+    <user id="986" type="supportstaff">
+        <name>
+            <firstname>Doug</firstname>
+            <lastname>Smith</lastname>
+        </name>
+        <username>doug_smith</username>
+        <password>password986</password>
+        <position>Team Lead</position>
+        <emailid>doug.smith@gmail.com</emailid>
+    </user>
+    <user id="465" type="client">
+        <name>
+            <firstname>Evelyn</firstname>
+            <lastname>Mathew</lastname>
+        </name>
+        <username>evelyn_mathew</username>
+        <password>password465</password>
+        <position>Manager</position>
+        <emailid>eve.mat@gmail.com</emailid>
+    </user>
+</users>

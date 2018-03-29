@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="supportsystem">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="supportticket" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ticketnumber" type="xs:string"></xs:element>
+                            <xs:element name="issuedate" type="xs:date"></xs:element>
+                            <xs:element name="status" type="statustype"></xs:element>
+                            <xs:element name="clientid" type="xs:integer"></xs:element>
+                            <xs:element name="supportmessage" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="message" type="xs:string"></xs:element>
+                                        <xs:element name="time" type="xs:dateTime"></xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="userid" type="xs:integer" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="category" type="categorytype" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="categorytype">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Hardware" />
+            <xs:enumeration value="Software" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="statustype">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="New" />
+            <xs:enumeration value="On-going" />
+            <xs:enumeration value="Resolved" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,11 @@
+body {
+    width: 980px;
+    margin: auto;
+}
+
+.login-form {
+    width: 50%;
+    position: fixed;
+    top: 20%;
+    left: 28%;
+}
