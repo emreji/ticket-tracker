@@ -3,7 +3,7 @@
     <supportticket category="Software">
         <ticketnumber>A100</ticketnumber>
         <issuedate>2018-01-28</issuedate>
-        <status>Resolved</status>
+        <status>On-going</status>
         <clientid>986</clientid>
         <supportmessage userid="986">
             <message>Installation failed</message>
@@ -48,4 +48,4 @@
             <time>2018-02-20T12:30:00</time>
         </supportmessage>
     <supportmessage userid="234"><message>fhfgbf</message><time>2018-03-28 21:15:12</time></supportmessage><supportmessage userid="234"><message>Hi</message><time>2018-03-28 21:15:51</time></supportmessage></supportticket>
-<supportticket category="Hardware"><ticketnumber>A345</ticketnumber><issuedate>2018-03-28</issuedate><status>New</status><clientid>234</clientid><supportmessage userid="234"><message>Issues</message><time>2018-03-28 17:37:34</time></supportmessage><supportmessage userid="234"><message>All okay now</message><time>2018-03-29 04:36:43</time></supportmessage><supportmessage userid="234"><message>adsfd</message><time>2018-03-29 17:01:56</time></supportmessage></supportticket><supportticket category="Software"><ticketnumber>445676</ticketnumber><issuedate>2018-03-16</issuedate><status>New</status><clientid>234</clientid><supportmessage userid="234"><message>Install MS Office on my computer</message><time>2018-03-29 13:43:26</time></supportmessage><supportmessage userid="234"><message>Any updates on this ticket?</message><time>2018-03-29 13:43:41</time></supportmessage><supportmessage userid="289"><message>No updates</message><time>2018-03-29 13:44:06</time></supportmessage><supportmessage userid="234"><message>dfcsdf</message><time>2018-03-29 16:23:01</time></supportmessage></supportticket></supportsystem>
+<supportticket category="Hardware"><ticketnumber>A345</ticketnumber><issuedate>2018-03-28</issuedate><status>On-going</status><clientid>234</clientid><supportmessage userid="234"><message>Issues</message><time>2018-03-28 17:37:34</time></supportmessage><supportmessage userid="234"><message>All okay now</message><time>2018-03-29 04:36:43</time></supportmessage><supportmessage userid="234"><message>adsfd</message><time>2018-03-29 17:01:56</time></supportmessage></supportticket><supportticket category="Software"><ticketnumber>445676</ticketnumber><issuedate>2018-03-16</issuedate><status>On-going</status><clientid>234</clientid><supportmessage userid="234"><message>Install MS Office on my computer</message><time>2018-03-29 13:43:26</time></supportmessage><supportmessage userid="234"><message>Any updates on this ticket?</message><time>2018-03-29 13:43:41</time></supportmessage><supportmessage userid="289"><message>No updates</message><time>2018-03-29 13:44:06</time></supportmessage><supportmessage userid="234"><message>dfcsdf</message><time>2018-03-29 16:23:01</time></supportmessage></supportticket></supportsystem>
