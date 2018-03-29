@@ -1,5 +1,6 @@
 <?php
 require_once 'datasource.php';
+require_once './Services/TicketService.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -11,12 +12,18 @@ if (!DataSource::isAvailable()) {
 }
 
 session_start();
+if (!isset($_SESSION['id']) || isset($_POST['logout'])) {
+    session_destroy();
+    header('Location:index.php');
+}
 
 $userId = $_SESSION['id'];
 $users = simplexml_load_file('xml/users.xml');
 $user = $users->xpath('/users/user[@id='.$userId.']')[0];
-$tickets = simplexml_load_file('xml/supportsystem.xml');
-$clientTickets = $tickets->xpath('/supportsystem/supportticket/clientid[text()='.$userId.']/parent::*');
+
+$ticketService = new TicketService();
+$tickets = $ticketService->getUserTickets($userId);
+
 ?>
 
 <!doctype html>
@@ -51,20 +58,20 @@ $clientTickets = $tickets->xpath('/supportsystem/supportticket/clientid[text()='
             </thead>
             <tbody>
                 <?php $i = 0;?>
-                <?php foreach ($clientTickets as $ticket) : ?>
+                <?php foreach ($tickets as $ticket) : ?>
                     <?php $i++?>
                     <tr>
                         <th scope="row"><?php echo $i ?></th>
-                        <td><a href="ticketInfo.php?id=<?php echo $ticket->ticketnumber; ?>"><?php echo $ticket->ticketnumber ?></a></td>
-                        <td><?php echo $ticket->attributes() ?></td>
-                        <td><?php echo $ticket->status ?></td>
+                        <td><a href="ticketInfo.php?id=<?php echo $ticket->getTicketNumber(); ?>"><?php echo $ticket->getTicketNumber(); ?></a></td>
+                        <td><?php echo $ticket->getCategory(); ?></td>
+                        <td><?php echo $ticket->getStatus(); ?></td>
                     </tr>
                 <?php endforeach;?>
             </tbody>
         </table>
-        <form>
+        <form method="post">
             <a href="addTicket.php" class="btn btn-primary mb-2">Add ticket</a>
+            <input type="submit" class="btn btn-primary mb-2" name="logout" value="Logout">
         </form>
-        <a class="btn btn-primary mb-2" href="index.php">Logout</a>
     </body>
 </html>

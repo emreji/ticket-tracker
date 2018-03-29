@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <users xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="users.xsd">
+    xsi:noNamespaceSchemaLocation="../schemas/users.xsd">
     <user id="234" type="client">
         <name>
             <firstname>Rob</firstname>

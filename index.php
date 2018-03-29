@@ -1,9 +1,11 @@
 <?php
-require_once 'datasource.php';
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+require_once './datasource.php';
+require_once './Services/UserService.php';
+
 if (!DataSource::isAvailable()) {
     echo 'Data Source not available';
     exit();
@@ -11,30 +13,29 @@ if (!DataSource::isAvailable()) {
 
 session_start();
 $errorFlag = false;
-$xml = simplexml_load_file('xml/users.xml');
 
-if(isset($_POST['login'])) {
+if (isset($_POST['login'])) {
 
     $usernameInput = $_POST['username'];
     $passwordInput = $_POST['password'];
-    for ($i = 0; $i < count($xml); $i++) {
-        if($xml->user[$i]->username == $usernameInput) {
-            if($xml->user[$i]->password == $passwordInput) {
-                $loggedInUser = $xml->user[$i];
-                $_SESSION['id'] = $loggedInUser->attributes()->id . "";
-                $_SESSION['type'] = $loggedInUser->attributes()->type . "";
 
-                if($loggedInUser->attributes()->type == "supportstaff") {
-                    header("Location:staffHome.php");
-                } else {
-                    header("Location:clientHome.php");
-                }
-            }
+    $userService = new UserService();
+    $loggedInUser = $userService->login($usernameInput, $passwordInput);
+
+    if ($loggedInUser == null) {
+        $loginError = "Incorrect username/password!";
+        $errorFlag = true;
+    } else {
+        $_SESSION['id'] = $loggedInUser->getUserId();
+        $_SESSION['type'] = $loggedInUser->getUserType();
+
+        if ($loggedInUser->isStaff()) {
+            header("Location:staffHome.php");
         } else {
-            $loginError = "Incorrect username/password!";
-            $errorFlag = true;
+            header("Location:clientHome.php");
         }
     }
+
 }
 
 

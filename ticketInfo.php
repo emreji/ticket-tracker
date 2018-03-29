@@ -11,12 +11,18 @@ if (!DataSource::isAvailable()) {
 }
 
 session_start();
+
+if (!isset($_SESSION['id']) || isset($_POST['logout'])) {
+    session_destroy();
+    header('Location:index.php');
+}
+
 if(isset($_GET['id'])) {
     $ticketId = $_GET['id'];
 
     $tickets = simplexml_load_file('xml/supportsystem.xml');
     $ticket = $tickets->xpath("/supportsystem/supportticket/ticketnumber[text()='$ticketId']/parent::*")[0];
-    $messages = $ticket->supportmessage;
+    $messages = $ticket->supportmessages->supportmessage;
 
 
     if (isset($_POST['addMessage'])) {

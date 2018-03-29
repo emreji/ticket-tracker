@@ -11,6 +11,11 @@ if (!DataSource::isAvailable()) {
 }
 
 session_start();
+if (!isset($_SESSION['id']) || isset($_POST['logout'])) {
+    session_destroy();
+    header('Location:index.php');
+}
+
 $tickets = simplexml_load_file('xml/supportsystem.xml');
 
 if(isset($_POST['add'])) {
