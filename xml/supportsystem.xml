@@ -56,4 +56,4 @@
             </supportmessage>
         </supportmessages>
     </supportticket>
-</supportsystem>
+<supportticket category="Hardware"><ticketnumber>A105</ticketnumber><issuedate>2018-03-14</issuedate><status>New</status><clientid>234</clientid><supportmessages><supportmessage userid="234"><message>Computer shut down.</message><time>2018-03-30 01:22:07</time></supportmessage></supportmessages></supportticket><supportticket category="Software"><ticketnumber>A300</ticketnumber><issuedate>2018-03-29</issuedate><status>New</status><clientid>234</clientid><supportmessages><supportmessage userid="234"><message>New software required</message><time>2018-03-30 01:22:36</time></supportmessage></supportmessages></supportticket></supportsystem>

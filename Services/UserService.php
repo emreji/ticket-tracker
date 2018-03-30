@@ -18,4 +18,11 @@ class UserService {
         }
         return null;
     }
+
+    public function getUserByUserId($userId) : User {
+        $users = simplexml_load_file('xml/users.xml');
+        $user = $users->xpath('/users/user[@id='.$userId.']')[0];
+
+        return User::convertFromUserXML($user);
+    }
 }

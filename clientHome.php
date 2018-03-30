@@ -1,6 +1,7 @@
 <?php
 require_once 'datasource.php';
 require_once './Services/TicketService.php';
+require_once './Services/UserService.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -18,8 +19,8 @@ if (!isset($_SESSION['id']) || isset($_POST['logout'])) {
 }
 
 $userId = $_SESSION['id'];
-$users = simplexml_load_file('xml/users.xml');
-$user = $users->xpath('/users/user[@id='.$userId.']')[0];
+$userService = new UserService();
+$user = $userService->getUserByUserId($userId);
 
 $ticketService = new TicketService();
 $tickets = $ticketService->getUserTickets($userId);
@@ -45,7 +46,7 @@ $tickets = $ticketService->getUserTickets($userId);
         <title>Home</title>
     </head>
     <body>
-        <h1>Welcome <?php echo $user->name->firstname . ' ' . $user->name->lastname ?></h1>
+        <h1>Welcome <?php echo $user->getFirstName() . ' ' . $user->getLastName() ?></h1>
         <h2>Ticket Information</h2>
         <table class="table table-striped">
             <thead>

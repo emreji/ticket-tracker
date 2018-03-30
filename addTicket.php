@@ -1,5 +1,6 @@
 <?php
 require_once 'datasource.php';
+require_once './Services/TicketService.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -15,24 +16,21 @@ if (!isset($_SESSION['id']) || isset($_POST['logout'])) {
     session_destroy();
     header('Location:index.php');
 }
-
-$tickets = simplexml_load_file('xml/supportsystem.xml');
-
 if(isset($_POST['add'])) {
-    $ticket = $tickets->addChild('supportticket');
-    $ticket->addChild('ticketnumber', $_POST['ticketNumber']);
-    $ticket->addChild('issuedate', $_POST['issueDate']);
-    $ticket->addChild('status', $_POST['issueStatus']);
-    $ticket->addAttribute('category', $_POST['issueCategory']);
-    $ticket->addChild('clientid', $_SESSION['id']);
-    $supportmessage = $ticket->addChild('supportmessage');
-    $supportmessage->addAttribute('userid', $_SESSION['id']);
-    $message = $supportmessage->addChild('message', $_POST['message']);
-    $message = $supportmessage->addChild('time', (new DateTime())->format('Y-m-d H:i:s'));
+    $ticket = new Ticket();
+    $ticket->setTicketNumber($_POST['ticketNumber']);
+    $ticket->setIssueDate($_POST['issueDate']);
+    $ticket->setStatus($_POST['issueStatus']);
+    $ticket->setCategory($_POST['issueCategory']);
+    $ticket->setClientId($_SESSION['id']);
+    $ticket->setMessages([$_POST['message']]);
 
-    $tickets->saveXML('xml/supportsystem.xml');
-
-    header('Location: clientHome.php');
+    $ticketService = new TicketService();
+    if ($ticketService->addTicket($ticket)) {
+        header('Location: clientHome.php');
+    } else {
+        echo 'Ticket not added!';
+    }
 }
 
 ?>
@@ -65,11 +63,11 @@ if(isset($_POST['add'])) {
                 </div>
                 <div class="form-group col-md-4">
                     <label for="issueDate">Issue Date</label>
-                    <input type="date" class="form-control" name="issueDate">
+                    <input type="date" class="form-control" name="issueDate" required>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="issueStatus">Status</label>
-                    <select class="form-control" name="issueStatus">
+                    <select class="form-control" name="issueStatus" required>
                         <option>Please select</option>
                         <option value="New">New</option>
                         <option value="On-going">On-going</option>
@@ -78,7 +76,7 @@ if(isset($_POST['add'])) {
                 </div>
                 <div class="form-group col-md-6">
                     <label for="issueCategory">Issue Category</label>
-                    <select class="form-control" name="issueCategory">
+                    <select class="form-control" name="issueCategory" required>
                         <option>Please select</option>
                         <option value="Hardware">Hardware</option>
                         <option value="Software">Software</option>
@@ -87,7 +85,7 @@ if(isset($_POST['add'])) {
             </div>
             <div class="form-group">
                 <label for="message">Message</label>
-                <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+                <textarea class="form-control" id="message" name="message" rows="3" required placeholder="Please describe the issue"></textarea>
             </div>
             <input type="submit" name="add" class="btn btn-primary" value="Add Ticket"/>
         </form>
