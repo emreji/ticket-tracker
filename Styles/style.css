@@ -1,6 +1,14 @@
+html, body {
+    height: 100%;
+}
+
+html{
+    margin: auto;
+}
+
 body {
     width: 980px;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .login-form {
@@ -8,4 +16,9 @@ body {
     position: fixed;
     top: 20%;
     left: 28%;
+}
+
+.copyright {
+    position: fixed;
+    bottom: 0;
 }
