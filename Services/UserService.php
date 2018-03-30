@@ -4,7 +4,7 @@ require_once './Models/User.php';
 class UserService {
 
     public function login($username, $password) : ?User {
-        $xml = simplexml_load_file('xml/users.xml');
+        $xml = simplexml_load_file('./XML/users.xml');
 
         for ($i = 0; $i < count($xml); $i++) {
             if($xml->user[$i]->username == $username) {
@@ -20,7 +20,7 @@ class UserService {
     }
 
     public function getUserByUserId($userId) : User {
-        $users = simplexml_load_file('xml/users.xml');
+        $users = simplexml_load_file('./XML/users.xml');
         $user = $users->xpath('/users/user[@id='.$userId.']')[0];
 
         return User::convertFromUserXML($user);

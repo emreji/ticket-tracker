@@ -10,13 +10,19 @@
                             <xs:element name="issuedate" type="xs:date"></xs:element>
                             <xs:element name="status" type="statustype"></xs:element>
                             <xs:element name="clientid" type="xs:integer"></xs:element>
-                            <xs:element name="supportmessage" minOccurs="0" maxOccurs="unbounded">
+                            <xs:element name="supportmessages" minOccurs="0" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="message" type="xs:string"></xs:element>
-                                        <xs:element name="time" type="xs:dateTime"></xs:element>
+                                        <xs:element name="supportmessage" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="message" type="xs:string"></xs:element>
+                                                    <xs:element name="time" type="xs:dateTime"></xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="userid" type="xs:integer" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
                                     </xs:sequence>
-                                    <xs:attribute name="userid" type="xs:integer" use="required"/>
                                 </xs:complexType>
                             </xs:element>
                         </xs:sequence>

@@ -2,7 +2,7 @@
 class DataSource
 {
     public static function isAvailable() : bool {
-        if(file_exists('xml/users.xml') && file_exists('xml/supportsystem.xml')) {
+        if(file_exists('XML/users.xml') && file_exists('XML/supportsystem.xml')) {
             return true;
         }
         else {

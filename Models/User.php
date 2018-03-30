@@ -139,6 +139,10 @@ class User
         $this->emailId = $emailId;
     }
 
+    public function getFullName() : string {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
     public function isStaff() : bool {
         return $this->getUserType() == 'supportstaff';
     }

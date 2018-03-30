@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<supportsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/supportsystem.xsd">
+<supportsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Schemas/supportsystem.xsd">
     <supportticket category="Software">
         <ticketnumber>A100</ticketnumber>
         <issuedate>2018-01-28</issuedate>
-        <status>On-going</status>
+        <status>Resolved</status>
         <clientid>986</clientid>
         <supportmessages>
             <supportmessage userid="986">
@@ -15,7 +15,7 @@
     <supportticket category="Hardware">
         <ticketnumber>A101</ticketnumber>
         <issuedate>2018-02-16</issuedate>
-        <status>On-going</status>
+        <status>Resolved</status>
         <clientid>465</clientid>
         <supportmessages>
             <supportmessage userid="465">
@@ -56,4 +56,4 @@
             </supportmessage>
         </supportmessages>
     </supportticket>
-<supportticket category="Hardware"><ticketnumber>A105</ticketnumber><issuedate>2018-03-14</issuedate><status>New</status><clientid>234</clientid><supportmessages><supportmessage userid="234"><message>Computer shut down.</message><time>2018-03-30 01:22:07</time></supportmessage></supportmessages></supportticket><supportticket category="Software"><ticketnumber>A300</ticketnumber><issuedate>2018-03-29</issuedate><status>New</status><clientid>234</clientid><supportmessages><supportmessage userid="234"><message>New software required</message><time>2018-03-30 01:22:36</time></supportmessage></supportmessages></supportticket></supportsystem>
+<supportticket category="Hardware"><ticketnumber>A105</ticketnumber><issuedate>2018-03-14</issuedate><status>On-going</status><clientid>234</clientid><supportmessages><supportmessage userid="234"><message>Computer shut down.</message><time>2018-03-30 01:22:07</time></supportmessage><supportmessage userid="234"><message>Please help!</message><time>2018-03-30 03:01:18</time></supportmessage></supportmessages></supportticket><supportticket category="Software"><ticketnumber>A300</ticketnumber><issuedate>2018-03-29</issuedate><status>On-going</status><clientid>234</clientid><supportmessages><supportmessage userid="234"><message>New software required</message><time>2018-03-30 01:22:36</time></supportmessage><supportmessage userid="234"><message>dsfsd</message><time>2018-03-30 02:55:10</time></supportmessage><supportmessage userid="234"><message>dvsdvd</message><time>2018-03-30 02:55:34</time></supportmessage><supportmessage userid="234"><message>sgdfd</message><time>2018-03-30 02:56:37</time></supportmessage><supportmessage userid="234"><message>sdgvf</message><time>2018-03-30 02:57:42</time></supportmessage><supportmessage userid="234"><message>hello</message><time>2018-03-30 03:00:42</time></supportmessage></supportmessages></supportticket><supportticket category="Software"><ticketnumber>A320</ticketnumber><issuedate>2018-03-29</issuedate><status>On-going</status><clientid>234</clientid><supportmessages><supportmessage userid="234"><message>Install new software</message><time>2018-03-30 03:17:15</time></supportmessage><supportmessage userid="289"><message>Working on it</message><time>2018-03-30 03:17:44</time></supportmessage><supportmessage userid="234"><message>Thanks, Keep me updated.</message><time>2018-03-30 03:18:24</time></supportmessage></supportmessages></supportticket></supportsystem>
